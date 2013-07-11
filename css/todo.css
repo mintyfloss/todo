@@ -1,0 +1,154 @@
+	/*** General ***/
+		body {
+			line-height:18px;
+			font-family:Arial, Helvetica, sans-serif;
+		}
+		
+		fieldset {
+			border:none;
+			margin:0;
+			padding:0;
+		}
+		
+		legend {
+			padding:0;
+			margin:0 0 18px 0;
+			font-weight:bold;
+		}
+		
+		input,
+		select{
+			background:#eee;
+			background:-moz-linear-gradient(100% 100% 90deg, #eee, #ddd);
+			background:-webkit-gradient(linear, left bottom, left top, from(#eee), to(#ddd));
+			-moz-border-radius:3px;
+			-webkit-border-radius:3px;
+			border-radius:3px;
+			border:none;
+			padding:2px 4px;
+		}
+		
+		input:hover,
+		select:hover,
+		input.saved:hover,
+		select.saved:hover {
+			background: #ddd;
+		}
+		
+		input:focus,
+		select:focus,
+		input.saved:focus,
+		select.saved:focus {
+			background: #ccc;
+		}
+		
+		input.saved,
+		select.saved {
+			background:#D7E9AC;
+			background:-moz-linear-gradient(100% 100% 90deg, #D7E9AC, #C9DC9A);
+			background:-webkit-gradient(linear, left bottom, left top, from(#D7E9AC), to(#C9DC9A));
+		}
+		
+		a.Grayed {
+			color:#999;
+			text-decoration:none;
+		}
+
+	/*** Layout ***/
+		.main {
+			width:918px;
+			overflow:hidden;
+		}
+		.toDoShell {
+
+		}
+
+	/*** Description ***/
+		.description {
+			font-size:11px;
+			padding:10px;
+			color:#555;
+		}
+
+	/*** Form ***/
+		.formBox {
+			padding:18px;
+			margin-bottom:18px;
+			background-color:#eee;
+		}
+			.formBox input,
+			.formBox select{
+				background:#ddd;
+				background:-moz-linear-gradient(100% 100% 90deg, #ddd, #ccc);
+				background:-webkit-gradient(linear, left bottom, left top, from(#ddd), to(#ccc));
+			}
+				input:hover,
+				select:hover {
+					background: #ccc;
+				}
+		
+				input:focus,
+				select:focus {
+					background: #bbb;
+				}
+		
+		.inputShell {
+			width:264px;
+			margin-bottom:18px;
+		}
+			.inputShell input {
+				width:200px;
+			}
+
+	/*** Action toolbar ***/
+		.collectionToolbar {
+			text-align:right;
+			margin:18px 24px 18px 18px;
+		}
+		
+	/*** CheckBox styling ***/
+		.checkBox {
+			margin-top:1px;
+			width:14px;
+			height:14px;
+			background:url('../images/checkbox-multi.gif') 0 -14px no-repeat;
+		}
+		
+		.collectionItemSelectOver .checkBox {
+			background-position:0 -28px;
+		}
+		
+		.collectionItemActive .checkBox,
+		.collectionItemSelectActive .checkBox {
+			background-position:0 -42px;
+		}
+
+
+	/*** ToDo list styling ***/
+		.collectionView {
+			display: table;
+		}
+		.collectionItem {
+			display: table-row;
+		}
+		.column {
+			display: table-cell;
+		}
+		.collectionItemSelect {
+			width:25px;
+		}		
+		.label {
+			width:245px;
+		}
+			.label input {
+				width:220px;
+			}
+		.date {
+			width:150px;
+		}
+		.priority {
+			width:75px;
+		}
+		.completion {
+			width:75px;
+		}
