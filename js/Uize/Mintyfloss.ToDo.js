@@ -27,11 +27,12 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 	
 			// Adds ToDo item
-			_classPrototype.addToDo = function(_label, _priority) {
+			_classPrototype.addToDo = function(_label, _priority, _callback) {
 				var
 					_this = this,
 					_validName = _label + '',
-					_validPriority = _this.priorityValues[_priority]
+					_validPriority = _this.priorityValues[_priority],
+					_addedSuccess = false
 				;
 		
 				if (!_validName) {
@@ -59,7 +60,11 @@ Uize.module ({
 		
 					// Store items
 					_this.storeItems();
+
+					_addedSuccess = true;
 				}
+
+				_callback(_addedSuccess);
 			}
 			
 			// Sorts the ToDo List
@@ -101,20 +106,6 @@ Uize.module ({
 				
 				// Fires event after sorting and storing
 				_this.fire('Items Sorted');
-			}
-			
-			// Populates the values of the priority dropdown input
-			_classPrototype.populatePriority = function() {
-				var
-					_this = this,
-					_priorityHtml = ''
-				;
-				
-				for (var key in _this.priorityValues) {
-					_priorityHtml += '<option>' + key + '<\/option>';
-				}
-				
-				Uize.Node.setInnerHtml(_this.getNode('priority'), _priorityHtml);
 			}
 			
 			// Loads the ToDo list from sessionStorage
@@ -162,19 +153,6 @@ Uize.module ({
 				}
 
 				if (!_this.isWired) {
-					// Wires the "Add To-do" button
-					_this.wireNode('submit', 'click', function() { _add(); });
-					
-					_this.wireNode('label', 'keyup', function(_domEvent) {
-						if (Uize.Node.Event.isKeyEnter (_domEvent))
-							_add();
-					});
-
-					_this.wireNode('priority', 'keyup', function(_domEvent) {
-						if (Uize.Node.Event.isKeyEnter (_domEvent))
-							_add();
-					});
-
 					// Wires the sort links
 					_this.wireNode('sortLabel', 'click', function() { _this.sortToDo('label'); });
 					_this.wireNode('sortDate', 'click', function() { _this.sortToDo('date'); });
@@ -190,9 +168,6 @@ Uize.module ({
 							_this.storeItems();
 						}
 					});
-		
-					// Populates the priority dropdown
-					_this.populatePriority();
 					
 					// Catches Save ToDo event and saves data
 					_this.wire('Save ToDo', function() { _this.storeItems(); });
