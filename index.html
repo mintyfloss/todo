@@ -1,154 +1,153 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>To-do List</title>
-	<meta name="robots" content="noindex">
 	<link rel="stylesheet" type="text/css" href="css/todo.css" />
 	<script type="text/javascript" src="js/Uize/Uize.js"></script>
 </head>
 
 <body>
-
-<div class="main">
-	<h1>To-do List</h1>
-	<div id="page_collection-shell" class="toDoShell">
-		<div class="collectionToolbar">
-			Actions:
-			<a id="page_collection_selectAll" href="javascript://">select all</a> |
-			<a id="page_collection_selectNone" href="javascript://">select none</a> |
-			<a id="page_collection_remove" href="javascript://">remove</a>
+	<div class="main">
+		<h1>To-do List</h1>
+		<div id="page_collection-shell" class="toDoShell">
+			<div class="collectionToolbar">
+				Actions:
+				<a id="page_collection_selectAll" href="javascript://">select all</a> |
+				<a id="page_collection_selectNone" href="javascript://">select none</a> |
+				<a id="page_collection_remove" href="javascript://">remove</a>
+			</div>
+			<form id="page-addItemForm">
+				<table class="collectionView">
+					<thead class="collectionHeader">
+						<tr class="row">
+							<td class="column collectionItemSelect">&nbsp;</td>
+							<td class="column label"><a id="page_collection-sortLabel" href="javascript://">Label</a></td>
+							<td class="column date"><a id="page_collection-sortDate" href="javascript://">Date</a></td>
+							<td class="column priority"><a id="page_collection-sortPriority" href="javascript://">Priority</a></td>
+							<td class="column completion"><a id="page_collection-sortCompletion" href="javascript://">Completion</a></td>
+							<td class="column"></td>
+						</tr>
+					</thead>
+					<tbody class="collectionItems" id="page_collection-items"></tbody>
+					<tfoot class="collectionFooter">
+						<tr class="row">
+							<td class="column collectionItemSelect">&nbsp;</td>
+							<td class="column label"><input type="input" id="page-labelInput" placeholder="Add new item" /></td>
+							<td class="column date"></td>
+							<td class="column priority"><select id="page-priorityInput"></select></td>
+							<td class="column completion"></td>
+							<td class="column"><button id="page_collection-submit">Add item</button></td>	
+						</tr>
+					</tfoot>
+				</table>
+			</form>	
 		</div>
-		<form id="page-addItemForm">
-			<table class="collectionView">
-				<thead class="collectionHeader">
-					<tr class="row">
-						<td class="column collectionItemSelect">&nbsp;</td>
-						<td class="column label"><a id="page_collection-sortLabel" href="javascript://">Label</a></td>
-						<td class="column date"><a id="page_collection-sortDate" href="javascript://">Date</a></td>
-						<td class="column priority"><a id="page_collection-sortPriority" href="javascript://">Priority</a></td>
-						<td class="column completion"><a id="page_collection-sortCompletion" href="javascript://">Completion</a></td>
-						<td class="column"></td>
-					</tr>
-				</thead>
-				<tbody class="collectionItems" id="page_collection-items"></tbody>
-				<tfoot class="collectionFooter">
-					<tr class="row">
-						<td class="column collectionItemSelect">&nbsp;</td>
-						<td class="column label"><input type="input" id="page-labelInput" placeholder="Add new item" /></td>
-						<td class="column date"></td>
-						<td class="column priority"><select id="page-priorityInput"></select></td>
-						<td class="column completion"></td>
-						<td class="column"><button id="page_collection-submit">Add item</button></td>	
-					</tr>
-				</tfoot>
-			</table>
-		</form>	
 	</div>
-</div>
 
-<!-- JavaScript code to make the dynamic collection "come alive" -->
+	<!-- JavaScript code to make the dynamic collection "come alive" -->
 
-<script type="text/javascript">
-Uize.module ({
-	required:[
-		'Uize.Node',
-		'Mintyfloss.TemplatesToDoItem',
-		'Mintyfloss.ToDo',
-		'Uize.Widget.Page'
-	],
-	builder:function () {
-		/*** create the example page widget ***/
-			var page = window.page = new Uize.Widget.Page;
+	<script type="text/javascript">
+	Uize.module ({
+		required:[
+			'Uize.Node',
+			'Mintyfloss.TemplatesToDoItem',
+			'Mintyfloss.ToDo',
+			'Uize.Widget.Page'
+		],
+		builder:function () {
+			/*** create the example page widget ***/
+				var page = window.page = new Uize.Widget.Page;
 
-		/*** add the Mintyfloss.ToDo widget ***/
-			var collection = page.addChild (
-				'collection',
-				Mintyfloss.ToDo,
-				{
-					built:false,
-					itemWidgetClass:Mintyfloss.ToDoItem,
-					itemWidgetProperties:{
-						html:Mintyfloss.TemplatesToDoItem,
-						cssClassBase:'collectionItem',
-						cssClassActive:'collectionItemActive',
-						cssClassOver:'collectionItemOver',
-						previewClickAction:'Select'
-					},
-					dragToReorder:false,
-					makeNewlyAddedSelected:false,
-					localized:{
-						removeItemConfirmation:'Are you sure you would like to remove this item?',
-						removeItemsConfirmation:'Are you sure you would like to remove the {0} selected items?'
+			/*** add the Mintyfloss.ToDo widget ***/
+				var collection = page.addChild (
+					'collection',
+					Mintyfloss.ToDo,
+					{
+						built:false,
+						itemWidgetClass:Mintyfloss.ToDoItem,
+						itemWidgetProperties:{
+							html:Mintyfloss.TemplatesToDoItem,
+							cssClassBase:'collectionItem',
+							cssClassActive:'collectionItemActive',
+							cssClassOver:'collectionItemOver',
+							previewClickAction:'Select'
+						},
+						dragToReorder:false,
+						makeNewlyAddedSelected:false,
+						localized:{
+							removeItemConfirmation:'Are you sure you would like to remove this item?',
+							removeItemsConfirmation:'Are you sure you would like to remove the {0} selected items?'
+						}
 					}
+				);
+
+			/*** implement hooks from UIZE.Widget ***/
+				page.showInform = function(params) {
+					if (params.message)
+						alert(params.message);
 				}
-			);
 
-		/*** implement hooks from UIZE.Widget ***/
-			page.showInform = function(params) {
-				if (params.message)
-					alert(params.message);
-			}
-
-			page.showConfirm = function(params) {
-				if (confirm(params.message) && params.yesHandler)
-					params.yesHandler();
-				else if (params.noHandler)
-					params.noHandler();
-			}
-
-		/*** wire events ***/
-			collection.wire('Items Sorted', function() { window.location.reload(); });
-
-		/*** wire up the page widget ***/
-			page.wireUi();
-
-		/*** Form ***/
-			var
-				_labelInput = page.getNode('labelInput'),
-				_priorityInput = page.getNode('priorityInput'),
-				_priorityHtml = ''
-			;
-
-			for (var key in collection.priorityValues) {
-				_priorityHtml += '<option>' + key + '<\/option>';
-			}
-
-			// Populates the values of the priority dropdown input
-			Uize.Node.setInnerHtml(_priorityInput, _priorityHtml);
-
-			// Sets up form submission
-			var
-				_form = page.getNode('addItemForm'),
-				_submitForm = function(_event) {
-					if (_event.preventDefault)
-						_event.preventDefault();
-
-					collection.addToDo(
-						_labelInput.value,
-						_priorityInput.value,
-						(function(_labelInput, _priorityInput) {
-							return function(_success) {
-								if (_success) {
-									_labelInput.value = '';
-									_priorityInput.value = _priorityInput.options.length > 1 ? _priorityInput.options[0].value : '';
-								}
-							};
-						})(_labelInput, _priorityInput)
-					);
-
-					return false;
+				page.showConfirm = function(params) {
+					if (confirm(params.message) && params.yesHandler)
+						params.yesHandler();
+					else if (params.noHandler)
+						params.noHandler();
 				}
-			;
 
-			if (_form.attachEvent)
-				_form.attachEvent('submit', _submitForm);
-			else
-				_form.addEventListener('submit', _submitForm);
-	}
-});
+			/*** wire events ***/
+				collection.wire('Items Sorted', function() { window.location.reload(); });
 
-</script>
+			/*** wire up the page widget ***/
+				page.wireUi();
 
+			/*** Form ***/
+				var
+					_labelInput = page.getNode('labelInput'),
+					_priorityInput = page.getNode('priorityInput'),
+					_priorityHtml = ''
+				;
+
+				for (var key in collection.priorityValues) {
+					_priorityHtml += '<option>' + key + '<\/option>';
+				}
+
+				// Populates the values of the priority dropdown input
+				Uize.Node.setInnerHtml(_priorityInput, _priorityHtml);
+
+				// Sets up form submission
+				var
+					_form = page.getNode('addItemForm'),
+					_submitForm = function(_event) {
+						if (_event.preventDefault)
+							_event.preventDefault();
+
+						collection.addToDo(
+							_labelInput.value,
+							_priorityInput.value,
+							(function(_labelInput, _priorityInput) {
+								return function(_success) {
+									if (_success) {
+										_labelInput.value = '';
+										_priorityInput.value = _priorityInput.options.length > 1 ? _priorityInput.options[0].value : '';
+									}
+								};
+							})(_labelInput, _priorityInput)
+						);
+
+						return false;
+					}
+				;
+
+				if (_form.attachEvent)
+					_form.attachEvent('submit', _submitForm);
+				else
+					_form.addEventListener('submit', _submitForm);
+		}
+	});
+
+	</script>
 </body>
 </html>
 
